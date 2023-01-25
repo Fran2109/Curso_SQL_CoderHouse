@@ -96,15 +96,15 @@ CREATE TABLE empleados (
     DNI VARCHAR(20) NOT NULL,
     Fecha_nacimiento DATE NOT NULL,
     Direccion VARCHAR(100) NOT NULL,
-    Telefonno VARCHAR(20) NOT NULL,
+    Telefono VARCHAR(20) NOT NULL,
     FOREIGN KEY (Id_posicion_empleado)
         REFERENCES posiciones_empleados (Id_posicion_empleado),
     FOREIGN KEY (Id_localidad)
         REFERENCES localidades (Id_localidad)
 );
 
-CREATE TABLE puntos_de_venta (
-    Id_punto_de_venta INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+CREATE TABLE locales (
+    Id_local INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     Id_localidad INT NOT NULL,
     Id_empleado INT NOT NULL,
     Direccion VARCHAR(100) NOT NULL,
@@ -118,7 +118,7 @@ CREATE TABLE puntos_de_venta (
 CREATE TABLE presupuestos_cabecera (
     Id_presupuesto INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     Id_cliente INT NOT NULL,
-    Id_punto_de_venta INT NOT NULL,
+    Id_local INT NOT NULL,
     FOREIGN KEY (Id_cliente)
         REFERENCES clientes (Id_cliente),
     FOREIGN KEY (Id_punto_de_venta)
@@ -141,7 +141,7 @@ INSERT INTO paises (Denominacion) VALUES
 	("Argentina"),
     ("Brazil"),
     ("Uruguay");
-    
+
 INSERT INTO provincias (Id_pais, Denominacion) VALUES
 	(1, "Buenos Aires"),
     (1, "Cordoba"),
@@ -150,7 +150,7 @@ INSERT INTO provincias (Id_pais, Denominacion) VALUES
 
 INSERT INTO localidades (Id_provincia, Denominacion) VALUES
 	(1, "Tortuguitas"),
-    (6, "sdafrs");
+    (3, "sdafrs");
     
 insert into clientes (Id_localidad, Denominacion, Direccion, Telefono) VALUES
 	(1, "Nicolas Collia", "Santa Maria 340", "11-35463346"),
@@ -173,7 +173,7 @@ INSERT INTO proveedores (Id_localidad, Denominacion, Nombre_empresa, Cuit, Direc
 	(1 , "Proveedor 1", "Sanitarios express 1", "32532523", "Calle Falsa 123", "11-45353464)"), 
     (2 , "Proveedor 2", "Sanitarios express 2", "63465764", "Calle Falsa 123", "11-76585623)"),
     (1 , "Proveedor 3", "Sanitarios express 3", "52345765", "Calle Falsa 123", "11-54746531)"),
-    (3 , "Proveedor 4", "Sanitarios express 4", "45756986", "Calle Falsa 123", "11-34637665)");
+    (2 , "Proveedor 4", "Sanitarios express 4", "45756986", "Calle Falsa 123", "11-34637665)");
 
 INSERT INTO productos (Id_rubro, Id_proveedor, Denominacion, Stock_minimo, Stock_real, Precio_unitario) VALUES
 	(1, 1, "Bomba Sumergible", 50,  200, 5500.00),
@@ -182,3 +182,49 @@ INSERT INTO productos (Id_rubro, Id_proveedor, Denominacion, Stock_minimo, Stock
     (2, 1, "Solapas",          150, 200, 300.00),
     (2, 2, "Manguera 50mts",   10,  20,  6500.00);
 
+INSERT INTO  pedidos(Id_producto, Cantidad, Precio_final, Fecha) VALUES
+	(1, 100, 25000.00,  CURDATE()),
+    (1, 150, 15000.00,  CURDATE()),
+    (2, 250, 40000.00,  CURDATE()),
+    (1, 100, 10000.00,  CURDATE());
+    
+INSERT INTO posiciones_empleados (Denominacion, Salario) VALUES
+	("Gerente",  180000.00),
+    ("Vendedor", 120000.00),
+    ("Cadete",   100000.00);
+
+INSERT INTO empleados (Id_posicion_empleado, Id_localidad, Nombre, Apellido, Edad, DNI, Fecha_nacimiento, Direccion, Telefono) VALUES
+	(2, 1, "Francisco", "Filosi", 21, "43675464", STR_TO_DATE('21-01-2001', '%d-%m-%Y'), "Santa Maria 365", "11-56459865"),
+    (1, 2, "Nicolas",   "Collia", 19, "54764323", STR_TO_DATE('27-01-2003', '%d-%m-%Y'), "Santa Maria 234", "11-78768695"),
+    (1, 1, "Monica",    "Collia", 32, "45684354", STR_TO_DATE('10-08-1980', '%d-%m-%Y'), "Santa Julia 675", "11-15645345");
+
+INSERT INTO locales (Id_localidad, Id_empleado, Direccion, Telefono) VALUES
+	(1, 2, "Centenario 123",  "11-34647456"),
+    (2, 1, "Santa Maria 123", "11-47986467"),
+    (1, 1, "Drago 456",       "11-58708904"),
+    (2, 2, "Centenario 634",  "11-56990856");
+    
+/*
+
+CREATE TABLE presupuestos_cabecera (
+    Id_presupuesto INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    Id_cliente INT NOT NULL,
+    Id_local INT NOT NULL,
+    FOREIGN KEY (Id_cliente)
+        REFERENCES clientes (Id_cliente),
+    FOREIGN KEY (Id_punto_de_venta)
+        REFERENCES puntos_de_venta (Id_punto_de_venta)
+);
+
+CREATE TABLE presupuestos_cuerpo (
+    Id_presupuesto_cuerpo INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    Id_producto INT NOT NULL,
+    Id_precio_lista INT NOT NULL,
+    Precio_real DECIMAL(10 , 2 ) NOT NULL,
+    Porcentaje_real DECIMAL(5 , 2 ) NOT NULL,
+    FOREIGN KEY (Id_producto)
+        REFERENCES productos (Id_producto),
+    FOREIGN KEY (Id_precio_lista)
+        REFERENCES precios_lista (Id_precio_lista)
+);
+*/
