@@ -121,16 +121,46 @@ CREATE TABLE presupuestos_cabecera (
     Id_local INT NOT NULL,
     FOREIGN KEY (Id_cliente)
         REFERENCES clientes (Id_cliente),
-    FOREIGN KEY (Id_punto_de_venta)
-        REFERENCES puntos_de_venta (Id_punto_de_venta)
+    FOREIGN KEY (Id_local)
+        REFERENCES locales (Id_local)
 );
 
 CREATE TABLE presupuestos_cuerpo (
     Id_presupuesto_cuerpo INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    Id_presupuesto INT NOT NULL,
     Id_producto INT NOT NULL,
     Id_precio_lista INT NOT NULL,
     Precio_real DECIMAL(10 , 2 ) NOT NULL,
     Porcentaje_real DECIMAL(5 , 2 ) NOT NULL,
+    Cantidad INT DEFAULT 1,
+    FOREIGN KEY (Id_presupuesto)
+        REFERENCES presupuestos_cabecera (Id_presupuesto),
+    FOREIGN KEY (Id_producto)
+        REFERENCES productos (Id_producto),
+    FOREIGN KEY (Id_precio_lista)
+        REFERENCES precios_lista (Id_precio_lista)
+);
+
+CREATE TABLE encargos_cabecera (
+    Id_encargo INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    Id_cliente INT NOT NULL,
+    Id_local INT NOT NULL,
+    FOREIGN KEY (Id_cliente)
+        REFERENCES clientes (Id_cliente),
+    FOREIGN KEY (Id_local)
+        REFERENCES locales (Id_local)
+);
+
+CREATE TABLE encargos_cuerpo (
+    Id_encargo_cuerpo INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    Id_encargo INT NOT NULL,
+    Id_producto INT NOT NULL,
+    Id_precio_lista INT NOT NULL,
+    Precio_real DECIMAL(10 , 2 ) NOT NULL,
+    Porcentaje_real DECIMAL(5 , 2 ) NOT NULL,
+    Cantidad INT DEFAULT 1,
+    FOREIGN KEY (Id_encargo)
+        REFERENCES encargos_cabecera (Id_encargo),
     FOREIGN KEY (Id_producto)
         REFERENCES productos (Id_producto),
     FOREIGN KEY (Id_precio_lista)
@@ -203,28 +233,24 @@ INSERT INTO locales (Id_localidad, Id_empleado, Direccion, Telefono) VALUES
     (2, 1, "Santa Maria 123", "11-47986467"),
     (1, 1, "Drago 456",       "11-58708904"),
     (2, 2, "Centenario 634",  "11-56990856");
+
+INSERT INTO presupuestos_cabecera (Id_cliente, Id_local) VALUES
+	(1, 2),
+    (2, 1),
+    (2, 2);
     
-/*
+INSERT INTO presupuestos_cuerpo (Id_presupuesto, Id_producto, Id_precio_lista, Precio_real, Porcentaje_real) VALUES
+	(1, 2, 1, 2500.00, 0.9),
+    (1, 1, 2, 3500.00, 1.0),
+    (2, 2, 2, 4500.00, 1.0);
 
-CREATE TABLE presupuestos_cabecera (
-    Id_presupuesto INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    Id_cliente INT NOT NULL,
-    Id_local INT NOT NULL,
-    FOREIGN KEY (Id_cliente)
-        REFERENCES clientes (Id_cliente),
-    FOREIGN KEY (Id_punto_de_venta)
-        REFERENCES puntos_de_venta (Id_punto_de_venta)
-);
+INSERT INTO encargos_cabecera (Id_cliente, Id_local) VALUES
+	(1, 2),
+    (2, 1),
+    (2, 2);
+    
+INSERT INTO encargos_cuerpo (Id_encargo, Id_producto, Id_precio_lista, Precio_real, Porcentaje_real) VALUES
+	(1, 2, 1, 2500.00, 0.9),
+    (1, 1, 2, 3500.00, 1.0),
+    (2, 2, 2, 4500.00, 1.0);
 
-CREATE TABLE presupuestos_cuerpo (
-    Id_presupuesto_cuerpo INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    Id_producto INT NOT NULL,
-    Id_precio_lista INT NOT NULL,
-    Precio_real DECIMAL(10 , 2 ) NOT NULL,
-    Porcentaje_real DECIMAL(5 , 2 ) NOT NULL,
-    FOREIGN KEY (Id_producto)
-        REFERENCES productos (Id_producto),
-    FOREIGN KEY (Id_precio_lista)
-        REFERENCES precios_lista (Id_precio_lista)
-);
-*/
