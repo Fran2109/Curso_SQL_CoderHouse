@@ -253,4 +253,3 @@ INSERT INTO encargos_cuerpo (Id_encargo, Id_producto, Id_precio_lista, Precio_re
 	(1, 2, 1, 2500.00, 0.9),
     (1, 1, 2, 3500.00, 1.0),
     (2, 2, 2, 4500.00, 1.0);
-
