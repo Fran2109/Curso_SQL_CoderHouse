@@ -136,3 +136,49 @@ CREATE TABLE presupuestos_cuerpo (
     FOREIGN KEY (Id_precio_lista)
         REFERENCES precios_lista (Id_precio_lista)
 );
+
+INSERT INTO paises (Denominacion) VALUES 
+	("Argentina"),
+    ("Brazil"),
+    ("Uruguay");
+    
+INSERT INTO provincias (Id_pais, Denominacion) VALUES
+	(1, "Buenos Aires"),
+    (1, "Cordoba"),
+    (1, "San Juan"),
+    (2, "Florianopolis");
+
+INSERT INTO localidades (Id_provincia, Denominacion) VALUES
+	(1, "Tortuguitas"),
+    (6, "sdafrs");
+    
+insert into clientes (Id_localidad, Denominacion, Direccion, Telefono) VALUES
+	(1, "Nicolas Collia", "Santa Maria 340", "11-35463346"),
+    (2, "Leandro Garcia", "Centenario 243",  "11-43635476"),
+    (1, "Osvaldo Garcia", "Calle Falsa 123", "11-63457345"),
+    (2, "Monica Filosi",  "Santa Maria 352", "11-53436434");
+
+INSERT INTO precios_lista (Denominacion, Porcentaje) VALUES 
+	("Mayorista",  0.8),
+    ("Intermedio", 0.9),
+    ("Minorista",  1.0);
+
+INSERT INTO rubros (Denominacion) VALUES
+	("AGUA"),
+    ("BOMBAS"),
+    ("ACCESORIOS POLIETILENO"),
+    ("FLOTANTES ROTOPLAS");
+
+INSERT INTO proveedores (Id_localidad, Denominacion, Nombre_empresa, Cuit, Direccion, Telefono) VALUES
+	(1 , "Proveedor 1", "Sanitarios express 1", "32532523", "Calle Falsa 123", "11-45353464)"), 
+    (2 , "Proveedor 2", "Sanitarios express 2", "63465764", "Calle Falsa 123", "11-76585623)"),
+    (1 , "Proveedor 3", "Sanitarios express 3", "52345765", "Calle Falsa 123", "11-54746531)"),
+    (3 , "Proveedor 4", "Sanitarios express 4", "45756986", "Calle Falsa 123", "11-34637665)");
+
+INSERT INTO productos (Id_rubro, Id_proveedor, Denominacion, Stock_minimo, Stock_real, Precio_unitario) VALUES
+	(1, 1, "Bomba Sumergible", 50,  200, 5500.00),
+    (1, 2, "Termocupla", 	   100, 180, 3850.00),
+    (1, 3, "Flotante", 		   20,  150, 2500.00),
+    (2, 1, "Solapas",          150, 200, 300.00),
+    (2, 2, "Manguera 50mts",   10,  20,  6500.00);
+
