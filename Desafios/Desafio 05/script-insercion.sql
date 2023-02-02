@@ -17,7 +17,9 @@ INSERT INTO provincias (Id_pais, Denominacion) VALUES
 INSERT INTO localidades (Id_provincia, Denominacion) VALUES
 	(1, "Tortuguitas"),
     (1, "Boulogne"),
-    (1, "Pilar");
+    (1, "Pilar"),
+    (2, "Malagueño"),
+    (2, "Cordoba Capital");
     
 insert into clientes (Id_localidad, Denominacion, Direccion, Telefono) VALUES
 	(1, "Nicolas Collia", "Santa Maria 340", "11-35463346"),
