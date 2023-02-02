@@ -2,11 +2,13 @@ DROP SCHEMA IF EXISTS Sanitarios;
 CREATE SCHEMA Sanitarios;
 USE Sanitarios;
 
+DROP TABLE IF EXISTS paises;
 CREATE TABLE paises (
     Id_pais INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
     Denominacion VARCHAR(50) NOT NULL
 );
 
+DROP TABLE IF EXISTS provincias;
 CREATE TABLE provincias (
     Id_provincia INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
     Id_pais INT NOT NULL,
@@ -15,6 +17,7 @@ CREATE TABLE provincias (
         REFERENCES paises (Id_pais)
 );
 
+DROP TABLE IF EXISTS localidades;
 CREATE TABLE localidades (
     Id_localidad INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
     Id_provincia INT NOT NULL,
@@ -23,6 +26,7 @@ CREATE TABLE localidades (
         REFERENCES provincias (Id_provincia)
 );
 
+DROP TABLE IF EXISTS clientes;
 CREATE TABLE clientes (
     Id_cliente INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
     Id_localidad INT NOT NULL,
@@ -33,17 +37,20 @@ CREATE TABLE clientes (
         REFERENCES localidades (Id_localidad)
 );
 
+DROP TABLE IF EXISTS precios_lista;
 CREATE TABLE precios_lista (
     Id_precio_lista INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
     Denominacion VARCHAR(50) NOT NULL,
     Porcentaje DECIMAL(3 , 2 ) NOT NULL
 );
 
+DROP TABLE IF EXISTS rubros;
 CREATE TABLE rubros (
     Id_rubro INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
     Denominacion VARCHAR(50)
 );
 
+DROP TABLE IF EXISTS proveedores;
 CREATE TABLE proveedores (
     Id_proveedor INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
     Id_localidad INT NOT NULL,
@@ -56,6 +63,7 @@ CREATE TABLE proveedores (
         REFERENCES localidades (Id_localidad)
 );
 
+DROP TABLE IF EXISTS productos;
 CREATE TABLE productos (
     Id_producto INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     Id_rubro INT NOT NULL,
@@ -70,6 +78,7 @@ CREATE TABLE productos (
         REFERENCES proveedores (Id_proveedor)
 );
 
+DROP TABLE IF EXISTS pedidos;
 CREATE TABLE pedidos (
     Id_pedido INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     Id_producto INT NOT NULL,
@@ -80,12 +89,14 @@ CREATE TABLE pedidos (
         REFERENCES productos (Id_producto)
 );
 
+DROP TABLE IF EXISTS posiciones_empleados;
 CREATE TABLE posiciones_empleados (
     Id_posicion_empleado INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     Denominacion VARCHAR(50) NOT NULL,
     Salario DECIMAL(10 , 2 ) NOT NULL
 );
 
+DROP TABLE IF EXISTS empleados;
 CREATE TABLE empleados (
     Id_empleado INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     Id_posicion_empleado INT NOT NULL,
@@ -103,6 +114,7 @@ CREATE TABLE empleados (
         REFERENCES localidades (Id_localidad)
 );
 
+DROP TABLE IF EXISTS locales;
 CREATE TABLE locales (
     Id_local INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     Id_localidad INT NOT NULL,
@@ -115,6 +127,7 @@ CREATE TABLE locales (
         REFERENCES empleados (Id_empleado)
 );
 
+DROP TABLE IF EXISTS presupuestos_cabecera;
 CREATE TABLE presupuestos_cabecera (
     Id_presupuesto INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     Id_cliente INT NOT NULL,
@@ -125,6 +138,7 @@ CREATE TABLE presupuestos_cabecera (
         REFERENCES locales (Id_local)
 );
 
+DROP TABLE IF EXISTS presupuestos_cuerpo;
 CREATE TABLE presupuestos_cuerpo (
     Id_presupuesto_cuerpo INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     Id_presupuesto INT NOT NULL,
@@ -141,6 +155,7 @@ CREATE TABLE presupuestos_cuerpo (
         REFERENCES precios_lista (Id_precio_lista)
 );
 
+DROP TABLE IF EXISTS encargos_cabecera;
 CREATE TABLE encargos_cabecera (
     Id_encargo INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     Id_cliente INT NOT NULL,
@@ -151,6 +166,7 @@ CREATE TABLE encargos_cabecera (
         REFERENCES locales (Id_local)
 );
 
+DROP TABLE IF EXISTS encargos_cuerpo;
 CREATE TABLE encargos_cuerpo (
     Id_encargo_cuerpo INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     Id_encargo INT NOT NULL,
