@@ -1,0 +1,70 @@
+-- MySQL dump 10.13  Distrib 8.0.30, for Win64 (x86_64)
+--
+-- Host: 127.0.0.1    Database: sanitarios
+-- ------------------------------------------------------
+-- Server version	8.0.30
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!50503 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+-- Las tablas que pertenecen a este backup son "clientes", "empleados", "locales" y "ventas".
+
+
+--
+-- Dumping data for table `clientes`
+--
+
+LOCK TABLES `clientes` WRITE;
+/*!40000 ALTER TABLE `clientes` DISABLE KEYS */;
+INSERT INTO `clientes` VALUES (1,1,'Nicolas Collia','Santa Maria 340','11-35463346'),(2,2,'Leandro Garcia','Centenario 243','11-43635476'),(3,1,'Osvaldo Garcia','Calle Falsa 123','11-63457345'),(4,2,'Monica Filosi','Santa Maria 352','11-53436434');
+/*!40000 ALTER TABLE `clientes` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Dumping data for table `empleados`
+--
+
+LOCK TABLES `empleados` WRITE;
+/*!40000 ALTER TABLE `empleados` DISABLE KEYS */;
+INSERT INTO `empleados` VALUES (1,2,1,'Francisco','Filosi',21,'43675464','2001-01-21','Santa Maria 365','11-56459865'),(2,1,2,'Nicolas','Collia',19,'54764323','2003-01-27','Santa Maria 234','11-78768695'),(3,1,1,'Monica','Collia',32,'45684354','1980-08-10','Santa Julia 675','11-15645345');
+/*!40000 ALTER TABLE `empleados` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Dumping data for table `locales`
+--
+
+LOCK TABLES `locales` WRITE;
+/*!40000 ALTER TABLE `locales` DISABLE KEYS */;
+INSERT INTO `locales` VALUES (1,1,2,'Centenario 123','11-34647456'),(2,2,1,'Santa Maria 123','11-47986467'),(3,1,1,'Drago 456','11-58708904'),(4,2,2,'Centenario 634','11-56990856');
+/*!40000 ALTER TABLE `locales` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Dumping data for table `ventas`
+--
+
+LOCK TABLES `ventas` WRITE;
+/*!40000 ALTER TABLE `ventas` DISABLE KEYS */;
+INSERT INTO `ventas` VALUES (1,1,1,'2002-12-03',270523.06),(2,1,2,'2002-08-02',118304.47),(3,1,3,'2002-11-01',813067.18),(4,2,1,'2002-07-26',383540.83),(5,2,2,'2002-03-23',969660.98),(6,2,3,'2002-03-06',971695.84),(7,3,1,'2002-05-01',735271.79),(8,3,2,'2002-09-08',224897.14),(9,3,3,'2002-01-25',655587.29);
+/*!40000 ALTER TABLE `ventas` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2023-03-06 21:33:50
