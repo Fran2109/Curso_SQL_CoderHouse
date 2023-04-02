@@ -207,22 +207,22 @@ CREATE TABLE IF NOT EXISTS ventas (
 
 DROP TABLE IF EXISTS before_ventas_log;
 CREATE TABLE IF NOT EXISTS before_ventas_log (
-    id_before_ventas_log INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    id_registro INT,
-    nombre_usuario CHAR(60),
-    fecha DATE,
-    hora TIME,
-    operacion CHAR(20)
+    Id_before_ventas_log INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    Id_registro INT,
+    Nombre_usuario CHAR(60),
+    Fecha DATE,
+    Hora TIME,
+    Operacion CHAR(20)
 );
 
 DROP TABLE IF EXISTS after_ventas_log;
 CREATE TABLE IF NOT EXISTS after_ventas_log (
-    id_before_ventas_log INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    id_registro INT,
-    nombre_usuario CHAR(60),
-    fecha DATE,
-    hora TIME,
-    operacion CHAR(20)
+    Id_before_ventas_log INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    Id_registro INT,
+    Nombre_usuario CHAR(60),
+    Fecha DATE,
+    Hora TIME,
+    Operacion CHAR(20)
 );
 
 -- Creacion de Views
