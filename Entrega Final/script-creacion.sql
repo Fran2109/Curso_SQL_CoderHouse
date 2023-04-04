@@ -21,6 +21,8 @@ CREATE TABLE IF NOT EXISTS provincias (
     Denominacion VARCHAR(50) NOT NULL,
     FOREIGN KEY (Id_pais)
         REFERENCES paises (Id_pais)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE
 );
 
 DROP TABLE IF EXISTS localidades;
@@ -30,6 +32,8 @@ CREATE TABLE IF NOT EXISTS localidades (
     Denominacion VARCHAR(50) NOT NULL,
     FOREIGN KEY (Id_provincia)
         REFERENCES provincias (Id_provincia)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE
 );
 
 DROP TABLE IF EXISTS clientes;
@@ -41,6 +45,8 @@ CREATE TABLE IF NOT EXISTS clientes (
     Telefono VARCHAR(20) NOT NULL,
     FOREIGN KEY (Id_localidad)
         REFERENCES localidades (Id_localidad)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE
 );
 
 DROP TABLE IF EXISTS precios_lista;
@@ -67,6 +73,8 @@ CREATE TABLE IF NOT EXISTS proveedores (
     Telefono VARCHAR(15) NOT NULL,
     FOREIGN KEY (Id_localidad)
         REFERENCES localidades (Id_localidad)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE
 );
 
 DROP TABLE IF EXISTS productos;
@@ -79,9 +87,13 @@ CREATE TABLE IF NOT EXISTS productos (
     Stock_real INT NOT NULL,
     Precio_unitario DECIMAL(8 , 2 ) NOT NULL,
     FOREIGN KEY (Id_rubro)
-        REFERENCES rubros (Id_rubro),
+        REFERENCES rubros (Id_rubro)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE,
     FOREIGN KEY (Id_proveedor)
         REFERENCES proveedores (Id_proveedor)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE
 );
 
 DROP TABLE IF EXISTS pedidos;
@@ -93,9 +105,13 @@ CREATE TABLE IF NOT EXISTS pedidos (
     Precio_final DECIMAL(8 , 2 ) NOT NULL,
     Fecha DATE NOT NULL,
     FOREIGN KEY (Id_producto)
-        REFERENCES productos (Id_producto),
+        REFERENCES productos (Id_producto)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE,
     FOREIGN KEY (Id_proveedor)
         REFERENCES proveedores (Id_proveedor)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE
 );
 
 DROP TABLE IF EXISTS posiciones_empleados;
@@ -118,9 +134,13 @@ CREATE TABLE IF NOT EXISTS empleados (
     Direccion VARCHAR(100) NOT NULL,
     Telefono VARCHAR(20) NOT NULL,
     FOREIGN KEY (Id_posicion_empleado)
-        REFERENCES posiciones_empleados (Id_posicion_empleado),
+        REFERENCES posiciones_empleados (Id_posicion_empleado)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE,
     FOREIGN KEY (Id_localidad)
         REFERENCES localidades (Id_localidad)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE
 );
 
 DROP TABLE IF EXISTS locales;
@@ -131,9 +151,13 @@ CREATE TABLE IF NOT EXISTS locales (
     Direccion VARCHAR(100) NOT NULL,
     Telefono VARCHAR(20) NOT NULL,
     FOREIGN KEY (Id_localidad)
-        REFERENCES localidades (Id_localidad),
+        REFERENCES localidades (Id_localidad)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE,
     FOREIGN KEY (Id_empleado)
         REFERENCES empleados (Id_empleado)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE
 );
 
 DROP TABLE IF EXISTS presupuestos_cabecera;
@@ -142,9 +166,13 @@ CREATE TABLE IF NOT EXISTS presupuestos_cabecera (
     Id_cliente INT NOT NULL,
     Id_local INT NOT NULL,
     FOREIGN KEY (Id_cliente)
-        REFERENCES clientes (Id_cliente),
+        REFERENCES clientes (Id_cliente)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE,
     FOREIGN KEY (Id_local)
         REFERENCES locales (Id_local)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE
 );
 
 DROP TABLE IF EXISTS presupuestos_cuerpo;
@@ -157,11 +185,17 @@ CREATE TABLE IF NOT EXISTS presupuestos_cuerpo (
     Porcentaje_real DECIMAL(5 , 2 ) NOT NULL,
     Cantidad INT DEFAULT 1,
     FOREIGN KEY (Id_presupuesto)
-        REFERENCES presupuestos_cabecera (Id_presupuesto),
+        REFERENCES presupuestos_cabecera (Id_presupuesto)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE,
     FOREIGN KEY (Id_producto)
-        REFERENCES productos (Id_producto),
+        REFERENCES productos (Id_producto)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE,
     FOREIGN KEY (Id_precio_lista)
         REFERENCES precios_lista (Id_precio_lista)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE
 );
 
 DROP TABLE IF EXISTS encargos_cabecera;
@@ -170,9 +204,13 @@ CREATE TABLE IF NOT EXISTS encargos_cabecera (
     Id_cliente INT NOT NULL,
     Id_local INT NOT NULL,
     FOREIGN KEY (Id_cliente)
-        REFERENCES clientes (Id_cliente),
+        REFERENCES clientes (Id_cliente)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE,
     FOREIGN KEY (Id_local)
         REFERENCES locales (Id_local)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE
 );
 
 DROP TABLE IF EXISTS encargos_cuerpo;
@@ -185,11 +223,17 @@ CREATE TABLE IF NOT EXISTS encargos_cuerpo (
     Porcentaje_real DECIMAL(5 , 2 ) NOT NULL,
     Cantidad INT DEFAULT 1,
     FOREIGN KEY (Id_encargo)
-        REFERENCES encargos_cabecera (Id_encargo),
+        REFERENCES encargos_cabecera (Id_encargo)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE,
     FOREIGN KEY (Id_producto)
-        REFERENCES productos (Id_producto),
+        REFERENCES productos (Id_producto)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE,
     FOREIGN KEY (Id_precio_lista)
         REFERENCES precios_lista (Id_precio_lista)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE
 );
 
 DROP TABLE IF EXISTS ventas;
@@ -200,9 +244,13 @@ CREATE TABLE IF NOT EXISTS ventas (
     Fecha DATE NOT NULL,
     Total DECIMAL(10 , 2 ) NOT NULL,
     FOREIGN KEY (Id_local)
-        REFERENCES locales (Id_local),
+        REFERENCES locales (Id_local)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE,
     FOREIGN KEY (Id_cliente)
         REFERENCES clientes (Id_cliente)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE
 );
 
 DROP TABLE IF EXISTS before_ventas_log;
